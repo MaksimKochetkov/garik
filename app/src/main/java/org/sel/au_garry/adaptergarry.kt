@@ -9,7 +9,8 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 
-class adaptergarry(val con: Context, val data: List<chardata>): RecyclerView.Adapter<adaptergarry.link>() {
+
+class adaptergarry(val con: Context, val data: MutableList<chardata>): RecyclerView.Adapter<adaptergarry.link>() {
     class link(vi: View):RecyclerView.ViewHolder(vi) {
         val imageiv: ImageView = vi.findViewById(R.id.imageView)
         val nametv: TextView = vi.findViewById(R.id.textViewName)

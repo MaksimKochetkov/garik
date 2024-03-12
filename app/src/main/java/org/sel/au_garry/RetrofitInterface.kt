@@ -5,5 +5,5 @@ import retrofit2.http.GET
 
 interface RetrofitInterface {
     @GET("characters")
-    fun pers(): Call<data>
+    fun pers(): Call<MutableList<chardata>>
 }

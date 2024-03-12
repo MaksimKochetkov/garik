@@ -26,14 +26,22 @@ class MainActivity : AppCompatActivity() {
         val rv = findViewById<RecyclerView>(R.id.revi)
         val retrofit = RetrofitClass().getRetrofit()
         val api = retrofit.create(RetrofitInterface::class.java)
-        val ret_call: Call<data> = api.pers()
-        ret_call.enqueue(object:retrofit2.Callback<data>
+        val ret_call: Call<MutableList<chardata>> = api.pers()
+        ret_call.enqueue(object:retrofit2.Callback<MutableList<chardata>>
         {
-            override fun onResponse(call: Call<data>, response: Response<data>) {
-                rv.adapter = response.body()?.let{adaptergarry(applicationContext, it.data)}
+            override fun onResponse(
+                call: Call<MutableList<chardata>>,
+                response: Response<MutableList<chardata>>
+            ) {
+                if (response.isSuccessful)
+                { rv.adapter = adaptergarry(applicationContext, response.body() as MutableList<chardata>)
+                    Toast.makeText(this@MainActivity, "мы молодец!", Toast.LENGTH_SHORT).show()
+                }
+                else
+                    Toast.makeText(this@MainActivity, "что-то не так", Toast.LENGTH_SHORT).show()
             }
 
-            override fun onFailure(call: Call<data>, t: Throwable) {
+            override fun onFailure(call: Call<MutableList<chardata>>, t: Throwable) {
                 Toast.makeText(this@MainActivity, "ДА БОЖЕ", Toast.LENGTH_SHORT).show()
             }
 
